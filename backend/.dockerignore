@@ -1,0 +1,8 @@
+__pycache__
+tests
+requirements-dev.txt
+.pytest_cache
+.venv
+.env
+.aws
+.omc

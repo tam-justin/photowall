@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Photo Wall</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>Photo Wall</h1>
+      <button type="button" id="open-upload" class="btn btn-primary">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <span>New post</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <p id="wall-message" class="message" role="status"></p>
+    <section id="wall" class="grid" aria-label="Photos"></section>
+  </main>
+
+  <footer>
+    <span id="server-info"></span>
+    · <a href="#" id="refresh-servers">Refresh servers</a>
+  </footer>
+
+  <dialog id="upload-dialog" class="modal modal-sm" aria-labelledby="upload-title">
+    <form id="upload-form" novalidate>
+      <div class="modal-head">
+        <h2 id="upload-title">New post</h2>
+        <button type="button" class="icon-btn" id="close-upload" aria-label="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <label class="dropzone" id="dropzone" for="photo">
+        <img id="preview" alt="" hidden>
+        <span id="dropzone-hint">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <strong>Choose a photo</strong>
+          <small>JPEG, PNG, GIF or WebP · up to 5 MB</small>
+        </span>
+        <input type="file" id="photo" accept="image/jpeg,image/png,image/gif,image/webp">
+      </label>
+
+      <div class="field">
+        <label for="caption">Caption</label>
+        <textarea id="caption" maxlength="200" rows="3" placeholder="Write a caption…"></textarea>
+        <span id="caption-count" class="count">0/200</span>
+      </div>
+      <div class="field">
+        <label for="password">Upload password</label>
+        <input type="password" id="password" autocomplete="off">
+      </div>
+
+      <p id="form-error" class="error" role="alert"></p>
+      <button type="submit" id="upload-btn" class="btn btn-primary btn-block">Share</button>
+    </form>
+  </dialog>
+
+  <dialog id="viewer" class="modal modal-lg" aria-label="Photo">
+    <article class="viewer">
+      <div class="viewer-media">
+        <img id="viewer-img" alt="">
+        <button type="button" class="nav prev" id="viewer-prev" aria-label="Previous photo">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button type="button" class="nav next" id="viewer-next" aria-label="Next photo">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="viewer-side">
+        <div class="viewer-head">
+          <time id="viewer-time"></time>
+          <button type="button" class="icon-btn" id="close-viewer" aria-label="Close">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <p id="viewer-caption" class="viewer-caption"></p>
+      </div>
+    </article>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    env_file: .env
+    environment:
+      PORT: "8080"
+      INSTANCE_ID: local
+      ZONE: local
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      BACKEND_URL: http://backend:8080
+      DNS_RESOLVER: 127.0.0.11
+      INSTANCE_ID: local-frontend
+      ZONE: local
+    depends_on:
+      - backend
